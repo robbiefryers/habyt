@@ -6,8 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { LeaseModel, RoomModel } from "@/shared/types";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { ErrorLabel } from "@/components/ErrorLabel";
 type FormData = z.infer<typeof bookingConfirmSchema>;
 
 
@@ -55,7 +56,8 @@ export function ConfirmStep({ stepComplete, room, leaseId }: Props) {
       stepComplete();
     }
     else {
-      setLeaseError('Something went wrong');
+      const errorMsg = await res.text();
+      setLeaseError(errorMsg)
     }
   }
 
@@ -101,14 +103,13 @@ export function ConfirmStep({ stepComplete, room, leaseId }: Props) {
             <p>
               I agree with Habyts <a className="underline text-neutral-500" href="#">Terms of Service</a> and <a className="underline text-neutral-500" href="#">Privacy Policy</a>
             </p>
-            { errors.accept_terms && <small className="text-xs text-red-600">{ errors.accept_terms.message }</small> }
+            <ErrorLabel error={ errors.accept_terms?.message } />
           </div>
         </div>
 
-
         <div className="p-4">
           <SubmitButton label="Next" disabled={ false } />
-          { leaseError && <small className="text-xs text-red-600">{ leaseError }</small> }
+          <ErrorLabel error={ leaseError } />
         </div>
 
       </form>

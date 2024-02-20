@@ -32,7 +32,6 @@ export default function BookingPage() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-
     const roomId = searchParams.get('room_id') ?? '';
 
     const fetchData = async () => {
@@ -45,7 +44,6 @@ export default function BookingPage() {
         setRoomError(errorMsg)
       }
     };
-
     fetchData();
   }, []);
 

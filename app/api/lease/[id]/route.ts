@@ -25,7 +25,6 @@ export async function GET(
         status: 400
       })
     }
-
     return Response.json(lease);
 
   } catch (e) {

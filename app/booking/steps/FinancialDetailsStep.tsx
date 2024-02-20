@@ -8,7 +8,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { countries } from 'countries-list';
-
+import { ErrorLabel } from "@/components/ErrorLabel";
 type FormData = z.infer<typeof bookingFinancialSchema>;
 
 
@@ -61,12 +61,12 @@ export function FinancialDetailsStep({ stepComplete }: Props) {
                 return <option key={ key } value={ key }>{ country.name }</option>
               }) }
             </select>
-            { errors.nationality && <small className="text-xs text-red-600">{ errors.nationality.message }</small> }
+            <ErrorLabel error={ errors.nationality?.message } />
           </div>
           <div className="flex-1">
             <label className="text-xs text-neutral-500">National ID</label>
-            <input  placeholder="National ID" { ...register("national_id") } />
-            { errors.national_id && <small className="text-xs text-red-600">{ errors.national_id.message }</small> }
+            <input placeholder="National ID" { ...register("national_id") } />
+            <ErrorLabel error={ errors.national_id?.message } />
           </div>
         </div>
 
@@ -78,24 +78,24 @@ export function FinancialDetailsStep({ stepComplete }: Props) {
                 return <option key={ key } value={ key }>{ status.replace('_', ' ').toUpperCase() }</option>
               }) }
             </select>
-            { errors.employment_status && <small className="text-xs text-red-600">{ errors.employment_status.message }</small> }
+            <ErrorLabel error={ errors.employment_status?.message } />
           </div>
           <div className="flex-1">
-          <label className="text-xs text-neutral-500">Monthly Income</label>
+            <label className="text-xs text-neutral-500">Monthly Income</label>
             <select { ...register("monthly_income") }>
               { Object.entries(MonthlyIncome).map(([key, status]) => {
                 return <option key={ key } value={ key }>{ status.replace('_', ' ').toUpperCase() }</option>
               }) }
             </select>
-            { errors.monthly_income && <small className="text-xs text-red-600">{ errors.monthly_income.message }</small> }
+            <ErrorLabel error={ errors.monthly_income?.message } />
           </div>
         </div>
 
         <div>
-            <label className="text-xs text-neutral-500">Move in date</label>
-            <input type="date" { ...register("move_in") } />
-            { errors.move_in && <small className="text-xs text-red-600">{ errors.move_in.message }</small> }
-          </div>
+          <label className="text-xs text-neutral-500">Move in date</label>
+          <input type="date" { ...register("move_in") } />
+          <ErrorLabel error={ errors.move_in?.message } />
+        </div>
       </div>
 
       <div className="p-4">

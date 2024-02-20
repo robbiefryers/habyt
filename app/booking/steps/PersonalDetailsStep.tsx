@@ -1,5 +1,6 @@
 'use client';
 
+import { ErrorLabel } from "@/components/ErrorLabel";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Gender } from "@/consts";
 import { bookingPersonalSchema } from "@/schemas";
@@ -19,7 +20,6 @@ export function PersonalDetailsStep({ stepComplete }: Props) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  type FormData = z.infer<typeof bookingPersonalSchema>;
   const {
     register,
     handleSubmit,
@@ -56,22 +56,22 @@ export function PersonalDetailsStep({ stepComplete }: Props) {
         <div className="flex flex-row gap-4">
           <div className="flex-1">
             <input type="text" placeholder="First Name" { ...register("first_name") } />
-            { errors.first_name && <small className="text-xs text-red-600">{ errors.first_name.message }</small> }
+            <ErrorLabel error={errors.first_name?.message}/>
           </div>
           <div className="flex-1">
             <input type="text" placeholder="Last Name" { ...register("last_name") } />
-            { errors.last_name && <small className="text-xs text-red-600">{ errors.last_name.message }</small> }
+            <ErrorLabel error={errors.last_name?.message}/>
           </div>
         </div>
 
         <div className="flex flex-row gap-4">
           <div className="flex-1">
             <input type="email" placeholder="Email" { ...register("email") } />
-            { errors.email && <small className="text-xs text-red-600">{ errors.email.message }</small> }
+            <ErrorLabel error={errors.email?.message}/>
           </div>
           <div className="flex-1">
             <input type="tel" placeholder="Phone" { ...register("phone") } />
-            { errors.phone && <small className="text-xs text-red-600">{ errors.phone.message }</small> }
+            <ErrorLabel error={errors.phone?.message}/>
           </div>
         </div>
 
@@ -79,7 +79,7 @@ export function PersonalDetailsStep({ stepComplete }: Props) {
           <div className="flex-1">
             <label className="text-xs text-neutral-500">Date of birth</label>
             <input type="date" placeholder="Date of birth" { ...register("dob") } />
-            { errors.dob && <small className="text-xs text-red-600">{ errors.dob.message }</small> }
+            <ErrorLabel error={errors.dob?.message}/>
           </div>
           <div className="flex-1">
             <label className="text-xs text-neutral-500">Gender</label>
@@ -88,7 +88,7 @@ export function PersonalDetailsStep({ stepComplete }: Props) {
               <option value={ Gender.male }>Male</option>
               <option value={ Gender.other }>Other</option>
             </select>
-            { errors.gender && <small className="text-xs text-red-600">{ errors.gender.message }</small> }
+            <ErrorLabel error={errors.gender?.message}/>
           </div>
         </div>
       </div>
