@@ -20,8 +20,6 @@ type Props = {
 export function ConfirmStep({ stepComplete, room, leaseId }: Props) {
 
   const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
   const [leaseError, setLeaseError] = useState<string>();
 
   const {
@@ -54,11 +52,6 @@ export function ConfirmStep({ stepComplete, room, leaseId }: Props) {
     });
 
     if (res.ok) {
-      const params = new URLSearchParams(searchParams);
-      params.set('lease_id', req.id);
-      replace(`${ pathname }?${ params.toString() }`);
-      console.log(params.get('lease_id'));
-      
       stepComplete();
     }
     else {

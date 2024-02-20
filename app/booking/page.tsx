@@ -16,40 +16,42 @@ export default function BookingPage() {
   const onStepComplete = () => next();
   const onBookingComplete = () => setComplete(true);
 
-  const [room, setRoom] = useState<RoomModel>();
-  const [complete, setComplete] = useState(false);
   const [leaseId] = useState(crypto.randomUUID());
+  const [room, setRoom] = useState<RoomModel>();
+  const [roomError, setRoomError] = useState<string>();
+  const [complete, setComplete] = useState(false);
 
   const steps: ReactElement[] = [
     <PersonalDetailsStep key='step_info' stepComplete={ onStepComplete } />,
     <FinancialDetailsStep key='step_confirm' stepComplete={ onStepComplete } />,
-    <ConfirmStep key='confirm_step' stepComplete={ onStepComplete } leaseId={leaseId} room={room}/>,
-    <SignStep key='sign_step' stepComplete={ onBookingComplete } leaseId={leaseId} />
+    <ConfirmStep key='confirm_step' stepComplete={ onStepComplete } leaseId={ leaseId } room={ room } />,
+    <SignStep key='sign_step' stepComplete={ onBookingComplete } leaseId={ leaseId } />
   ]
 
   const { prev, next, stepIdx } = useStepper(steps.length);
   const searchParams = useSearchParams();
 
   useEffect(() => {
-  
+
     const roomId = searchParams.get('room_id') ?? '';
 
-
     const fetchData = async () => {
-      try {
-        const res = await fetch(`/api/rooms/${ roomId }`);
+      const res = await fetch(`/api/rooms/${ roomId }`);
+      if (res.ok) {
         const data: RoomModel = await res.json();
         setRoom(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      } else {
+        const errorMsg = await res.text();
+        setRoomError(errorMsg)
       }
     };
 
     fetchData();
   }, []);
-  
-  if(room === undefined) return (<div>Loading...</div>)
-  if (complete) return <WelcomeView room={room}/>
+
+  if (roomError) return <div>{ roomError }</div>
+  else if (room === undefined) return (<div>Loading...</div>)
+  else if (complete) return <WelcomeView room={ room } />
 
   return (
     <div>
