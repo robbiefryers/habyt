@@ -12,7 +12,7 @@ See implementation notes below.
   - state managed in URL
   - sensible data collection
   - mock interaction that calls api routes that would call DocuSign
-    - `POST /api/lease/` - creates a new draft lease agreement
+    - `PUT /api/lease/` - create or update a new draft lease agreement
     - `GET /api/lease/[id]` - fetches new draft lease agreement
     - `PATCH /api/lease/sign/[id]` - signs draft lease agreement
   - Basic welcome view on completion
