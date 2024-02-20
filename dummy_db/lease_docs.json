@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "519d1b78-28c8-4702-9f85-7e39bf33d877",
+    "first_name": "Robbie",
+    "last_name": "Fryers",
+    "email": "test@gmail.com",
+    "room_id": "5590",
+    "move_in": "2024-02-22",
+    "signed": true
+  }
+]

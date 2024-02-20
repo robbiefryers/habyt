@@ -46,7 +46,7 @@ export function ConfirmStep({ stepComplete, room, leaseId }: Props) {
 
     // Make an API call that will 'call' DocuSign
     const res = await fetch(`/api/lease/`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         "Content-Type": "application/json"
       },
