@@ -1,7 +1,7 @@
 'use client';
 
 import { SubmitButton } from "@/components/SubmitButton";
-import { ButtonTheme, EmploymentStatus, MonthlyIncome } from "@/consts";
+import { EmploymentStatus, MonthlyIncome } from "@/consts";
 import { bookingFinancialSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -37,8 +37,6 @@ export function FinancialDetailsStep({ stepComplete }: Props) {
     }
   });
 
-
-
   const onSubmit: SubmitHandler<FormData> = (data) => {
     const params = new URLSearchParams(searchParams);
     params.set('nationality', data.nationality);
@@ -50,10 +48,6 @@ export function FinancialDetailsStep({ stepComplete }: Props) {
     stepComplete();
   }
 
-
-  const i = "mt-1 w-full rounded-lg bg-white p-3 border text-[13px] focus:ring-opacity-50 border-gray-300 placeholder:text-sm leading-3 focus:ring-common-blue focus:border-common-blue focus:ring"
-
-
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
 
@@ -62,7 +56,7 @@ export function FinancialDetailsStep({ stepComplete }: Props) {
         <div className="flex flex-row gap-4">
           <div className="flex-1">
             <label className="text-xs text-neutral-500">Nationality</label>
-            <select { ...register("nationality") } className={ i }>
+            <select { ...register("nationality") }>
               { Object.entries(countries).map(([key, country]) => {
                 return <option key={ key } value={ key }>{ country.name }</option>
               }) }
@@ -71,7 +65,7 @@ export function FinancialDetailsStep({ stepComplete }: Props) {
           </div>
           <div className="flex-1">
             <label className="text-xs text-neutral-500">National ID</label>
-            <input className={ i } placeholder="National ID" { ...register("national_id") } />
+            <input  placeholder="National ID" { ...register("national_id") } />
             { errors.national_id && <small className="text-xs text-red-600">{ errors.national_id.message }</small> }
           </div>
         </div>
@@ -79,7 +73,7 @@ export function FinancialDetailsStep({ stepComplete }: Props) {
         <div className="flex flex-row gap-4">
           <div className="flex-1">
             <label className="text-xs text-neutral-500">Employment status</label>
-            <select { ...register("employment_status") } className={ i }>
+            <select { ...register("employment_status") }>
               { Object.entries(EmploymentStatus).map(([key, status]) => {
                 return <option key={ key } value={ key }>{ status.replace('_', ' ').toUpperCase() }</option>
               }) }
@@ -88,7 +82,7 @@ export function FinancialDetailsStep({ stepComplete }: Props) {
           </div>
           <div className="flex-1">
           <label className="text-xs text-neutral-500">Monthly Income</label>
-            <select { ...register("monthly_income") } className={ i }>
+            <select { ...register("monthly_income") }>
               { Object.entries(MonthlyIncome).map(([key, status]) => {
                 return <option key={ key } value={ key }>{ status.replace('_', ' ').toUpperCase() }</option>
               }) }
@@ -99,10 +93,9 @@ export function FinancialDetailsStep({ stepComplete }: Props) {
 
         <div>
             <label className="text-xs text-neutral-500">Move in date</label>
-            <input type="date" className={i} { ...register("move_in") } />
+            <input type="date" { ...register("move_in") } />
             { errors.move_in && <small className="text-xs text-red-600">{ errors.move_in.message }</small> }
           </div>
-
       </div>
 
       <div className="p-4">

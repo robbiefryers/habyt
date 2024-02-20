@@ -1,7 +1,7 @@
 'use client';
 
 import { SubmitButton } from "@/components/SubmitButton";
-import { ButtonTheme, EmploymentStatus, Gender, MonthlyIncome } from "@/consts";
+import { Gender } from "@/consts";
 import { bookingPersonalSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -48,9 +48,6 @@ export function PersonalDetailsStep({ stepComplete }: Props) {
     stepComplete();
   }
 
-  const i = "mt-1 w-full rounded-lg bg-white p-3 border text-[13px] focus:ring-opacity-50 border-gray-300 placeholder:text-sm leading-3 focus:ring-common-blue focus:border-common-blue focus:ring"
-
-
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
 
@@ -58,22 +55,22 @@ export function PersonalDetailsStep({ stepComplete }: Props) {
 
         <div className="flex flex-row gap-4">
           <div className="flex-1">
-            <input className={ i } type="text" placeholder="First Name" { ...register("first_name") } />
+            <input type="text" placeholder="First Name" { ...register("first_name") } />
             { errors.first_name && <small className="text-xs text-red-600">{ errors.first_name.message }</small> }
           </div>
           <div className="flex-1">
-            <input className={ i } type="text" placeholder="Last Name" { ...register("last_name") } />
+            <input type="text" placeholder="Last Name" { ...register("last_name") } />
             { errors.last_name && <small className="text-xs text-red-600">{ errors.last_name.message }</small> }
           </div>
         </div>
 
         <div className="flex flex-row gap-4">
           <div className="flex-1">
-            <input className={ i } type="email" placeholder="Email" { ...register("email") } />
+            <input type="email" placeholder="Email" { ...register("email") } />
             { errors.email && <small className="text-xs text-red-600">{ errors.email.message }</small> }
           </div>
           <div className="flex-1">
-            <input className={ i } type="tel" placeholder="Phone" { ...register("phone") } />
+            <input type="tel" placeholder="Phone" { ...register("phone") } />
             { errors.phone && <small className="text-xs text-red-600">{ errors.phone.message }</small> }
           </div>
         </div>
@@ -81,12 +78,12 @@ export function PersonalDetailsStep({ stepComplete }: Props) {
         <div className="flex flex-row gap-4">
           <div className="flex-1">
             <label className="text-xs text-neutral-500">Date of birth</label>
-            <input className={ i } type="date" placeholder="Date of birth" { ...register("dob") } />
+            <input type="date" placeholder="Date of birth" { ...register("dob") } />
             { errors.dob && <small className="text-xs text-red-600">{ errors.dob.message }</small> }
           </div>
           <div className="flex-1">
             <label className="text-xs text-neutral-500">Gender</label>
-            <select { ...register("gender") } className={ i }>
+            <select { ...register("gender") }>
               <option value={ Gender.female }>Female</option>
               <option value={ Gender.male }>Male</option>
               <option value={ Gender.other }>Other</option>

@@ -25,3 +25,14 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer components {
+  input, select {
+    @apply w-full rounded-lg p-3 leading-3 placeholder:text-sm bg-white border border-gray-300 focus:outline-none focus:ring-1 focus:border-black focus:ring-black
+  }
+
+  .black-btn {
+    @apply w-full p-2 border-2 rounded bg-black text-white hover:bg-white hover:text-black border-black
+  }
+
+}

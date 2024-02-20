@@ -21,8 +21,8 @@ async function getData(): Promise<RoomModel[]> {
 
 
 export default async function RoomsPage() {
-
   const data = await getData();
+
   return (
     <div className="p-4">
       <div className="text-center text-2xl mb-6">Rooms</div>

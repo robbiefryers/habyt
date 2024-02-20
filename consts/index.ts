@@ -1,14 +1,3 @@
-export enum ButtonTheme {
-  Black
-}
-
-export const ButtonVariants: Record<string, string> = {
-  [ButtonTheme.Black]: 'bg-black text-white hover:bg-white p-2 hover:text-black border-2 rounded-lg block min-w-40 text-center',
-};
-
-
-
-
 export enum Gender {
   male = 'male',
   female = 'female',
@@ -32,8 +21,7 @@ export enum MonthlyIncome {
 }
 
 
-
-
+// I would envision there must be a lookup done at some stage to populate salary bands depending on city
 export const CityIncomeBands: { [city: string]: { [income in MonthlyIncome]: string } } = {
   'berkely': {
     [MonthlyIncome.low]: '<$1000',
@@ -50,4 +38,3 @@ export const CityIncomeBands: { [city: string]: { [income in MonthlyIncome]: str
     [MonthlyIncome.high]: '>€3000'
   }
 }
-

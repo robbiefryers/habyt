@@ -66,8 +66,7 @@ export const RoomCard = ({ room }: { room: RoomModel }) => (
         <div>${ Math.floor(room.pricing.minimumPrice / 100) }</div>
       </div>
       <div>
-        <Link className="p-2 rounded bg-black text-white 
-        hover:bg-white hover:text-black border-2" href={ `booking?room_id=${ room.id }` }>
+        <Link className="black-btn" href={ `booking/?room_id=${ room.id }` }>
           Book this place
         </Link>
       </div>

@@ -34,9 +34,6 @@ export function ConfirmStep({ stepComplete, room, leaseId }: Props) {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
 
-    console.log(leaseId);
-    
-
     const req: LeaseModel = {
       id: leaseId,
       first_name: searchParams.get('first_name')!,
